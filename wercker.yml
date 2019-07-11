@@ -40,9 +40,9 @@ deploy-to-oke:
         code: cat kubernetes-deployment.yml
     
       
-    - script:
-        name: wait to delete namespace
-        code: sleep 60
+#    - script:
+#        name: wait to delete namespace
+#        code: sleep 60
         
     - kubectl:
         name: delete deplyoment
