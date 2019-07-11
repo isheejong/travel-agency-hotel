@@ -17,7 +17,7 @@ spec:
         run: ta-hotel
     spec:
       containers:
-      - image: $OKE_REPOSITORY/$WERCKER_APPLICATION_NAME:$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT 
+      - image: $OKE_REPOSITORY:$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT 
         imagePullPolicy: Always 
         name: ta-hotel
         ports:
@@ -38,21 +38,3 @@ spec:
     - port: 9003
       targetPort: 5000 
   type: ClusterIP
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: ta-hotel-ing
-  annotations:
-    kubernetes.io/ingress.class: 'nginx'
-    ingress.kubernetes.io/add-base-url: 'true'
-    #ingress.kubernetes.io/rewrite-target: /
-    #ingress.kubernetes.io/app-root: /
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /hotels
-        backend:
-          serviceName: ta-hotel-svc
-          servicePort: 9003
